@@ -1,13 +1,10 @@
-import Cardd from "../../Componentes/Cardd";
+import CardData from "../../Componentes/Cardd.jsx";
 
 const Login = () => {
   return (
-    <div className="bg-[#011e4a] h-screen">
+    <div>
       <div>Login</div>
-      <div>
-      <Cardd></Cardd>
-      </div>
-      <div>Hola mundo</div>
+      <CardData />
     </div>
   );
 };

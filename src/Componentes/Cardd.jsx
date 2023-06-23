@@ -1,13 +1,12 @@
-import CCard from "@coreui/react";
-import CCardBody from "@coreui/react";
-import CCardTitle from "@coreui/react";
-import CCardText from "@coreui/react";
-import CButton from "@coreui/react";
+import { CCard, CCardBody, CButton } from "@coreui/react";
 
-const Cardd = () => {
+const CardData = () => {
   return (
-<div>Bb</div>
+    <CCard style={{ height: "12rem" }} className="bg-red-300 my-2">
+      <CCardBody>This is some text within a card body.</CCardBody>
+      <CButton color="primary">Primary</CButton>
+    </CCard>
   );
-}
+};
 
-export default Cardd;
+export default CardData;
