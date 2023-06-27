@@ -39,7 +39,8 @@
         "resizable": true,
         "title": "Data police analytics",
         "width": 1080,
-        "height": 720
+        "height": 720,
+        "maximized": true
       }
     ]
   }

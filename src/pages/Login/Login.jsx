@@ -1,14 +1,17 @@
 import { TextField, Button } from "@mui/material";
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
+import { useNavigate } from "react-router-dom";
+import { CFormInput, CForm } from "@coreui/react";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({});
 
   const [message, setMessage] = useState("");
 
   async function greet() {
-    setMessage(await invoke("get_data", userData));
+    setMessage(await invoke("login", userData));
   }
 
   const handleData = (e) => {
@@ -36,6 +39,23 @@ const Login = () => {
         onChange={handleData}
       />
       {message}
+      <Button
+        onClick={() => {
+          navigate("/dashboard/start");
+        }}
+      >
+        Login
+      </Button>
+      <CForm>
+        <CFormInput
+          type="email"
+          id="exampleFormControlInput1"
+          label="Email address"
+          placeholder="name@example.com"
+          text="Must be 8-20 characters long."
+          aria-describedby="exampleFormControlInputHelpInline"
+        />
+      </CForm>
     </div>
   );
 };
