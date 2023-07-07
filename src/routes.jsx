@@ -1,56 +1,67 @@
 import React from "react";
 import CIcon from "@coreui/icons-react";
 import {
-  cilDescription,
-  cilSpeedometer,
+  cilHome,
   cilFolderOpen,
-  cilBook,
+  cilPeople,
   cilUserFollow,
-  cilChart,
   cilPlus,
-  cilBookmark,
+  cilClipboard,
 } from "@coreui/icons";
 import { CNavItem, CNavTitle } from "@coreui/react";
 
 const _adminNav = [
   {
     component: CNavItem,
-    name: "Dashboard",
+    name: "Inicio",
     to: "/dashboard/start",
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
+    role: "all",
   },
   {
     component: CNavTitle,
-    name: "Informacion",
+    name: "Analisis",
   },
   {
     component: CNavItem,
-    name: "Tesis",
-    to: "/dashboard/start",
-    icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
+    name: "Cadetes",
+    to: "/dashboard/cadets",
+    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+    role: "all",
   },
   {
     component: CNavItem,
-    name: "Proyectos de residencia",
-    to: "/dashboard/start",
+    name: "Procesar datos",
+    to: "/dashboard/processData",
     icon: <CIcon icon={cilFolderOpen} customClassName="nav-icon" />,
+    role: "all",
   },
   {
     component: CNavItem,
-    name: "Agregar contenido",
-    to: "/dashboard/start",
+    name: "Agregar Cadete",
+    to: "/dashboard/addCadet",
     icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+    role: "all",
   },
   {
     component: CNavTitle,
-    name: "Extras",
+    name: "Administración",
+    role: "all",
   },
   {
     component: CNavItem,
-    name: "Agregar usuarios",
-    to: "/dashboard/addUsers",
-    icon: <CIcon icon={cilUserFollow} customClassName="nav-icon" />,
+    name: "Administrar usuarios",
+    to: "/dashboard/manageUsers",
+    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+    role: "admin",
   },
+  // {
+  //   component: CNavItem,
+  //   name: "Administrar campos",
+  //   to: "/dashboard/manageInputs",
+  //   icon: <CIcon icon={cilClipboard} customClassName="nav-icon" />,
+  //   role: "admin",
+  // },
 ];
 
 export default _adminNav;

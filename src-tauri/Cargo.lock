@@ -2486,9 +2486,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "policeDataApp"
+name = "police_data_app"
 version = "0.0.0"
 dependencies = [
+ "anyhow",
  "serde",
  "serde_json",
  "surrealdb",
