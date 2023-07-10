@@ -15,12 +15,19 @@ import {
 import CheckCreateUserModal from "../Modals/CheckCreateUserModal.jsx";
 
 const RegisterUserCard = () => {
+  const [canCreate, setCanCreate] = useState(false);
   const [visibleCreate, setVisibleCreate] = useState(false);
 
   const [formValues, setFormValues] = useState({
     identifier: "",
     password: "",
   });
+
+  const openCheckModal = () => {
+    if (formValues.password !== "" && formValues.identifier !== "") {
+      setVisibleCreate(true);
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -62,7 +69,7 @@ const RegisterUserCard = () => {
             <CCol xs={12} md={4}>
               <CFormLabel>Contraseña</CFormLabel>
               <CFormInput
-                type="password"
+                type="text"
                 name="password"
                 value={formValues.password}
                 onChange={handleInputChange}
@@ -72,13 +79,11 @@ const RegisterUserCard = () => {
           <CRow className="pt-4 ">
             <CCol className="d-flex justify-content-end gap-4">
               <CButton
-                disabled={
-                  formValues.password === "" && formValues.identifier === ""
-                }
+                disabled={canCreate}
                 variant="outline"
                 color="primary"
                 className="mr-2"
-                onClick={() => setVisibleCreate(!visibleCreate)}
+                onClick={() => openCheckModal()}
               >
                 Crear usuario
               </CButton>

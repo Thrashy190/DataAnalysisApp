@@ -4,20 +4,13 @@ import {
   cilHome,
   cilFolderOpen,
   cilPeople,
-  cilUserFollow,
+  cilSettings,
   cilPlus,
   cilClipboard,
 } from "@coreui/icons";
 import { CNavItem, CNavTitle } from "@coreui/react";
 
 const _adminNav = [
-  {
-    component: CNavItem,
-    name: "Inicio",
-    to: "/dashboard/start",
-    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
-    role: "all",
-  },
   {
     component: CNavTitle,
     name: "Analisis",
@@ -53,6 +46,13 @@ const _adminNav = [
     name: "Administrar usuarios",
     to: "/dashboard/manageUsers",
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+    role: "admin",
+  },
+  {
+    component: CNavItem,
+    name: "Ajustes",
+    to: "/dashboard/settings",
+    icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
     role: "admin",
   },
   // {
