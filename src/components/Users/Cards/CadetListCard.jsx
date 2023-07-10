@@ -27,24 +27,18 @@ const CadetListCard = () => {
         <CCardTitle className="pt-2">Lista de Cadetes</CCardTitle>
       </CCardHeader>
       <CCardBody>
-        <CTable striped responsive>
+        <CTable striped responsive hover>
           <CTableHead>
             <CTableRow>
               <CTableHeaderCell>Identificador</CTableHeaderCell>
               <CTableHeaderCell>Fecha de creacion</CTableHeaderCell>
-              <CTableHeaderCell></CTableHeaderCell>
             </CTableRow>
           </CTableHead>
           <CTableBody>
             {users.map((user) => (
-              <CTableRow key={user.id}>
+              <CTableRow key={user.id} className="cursor-pointer">
                 <td>{user.identifier}</td>
                 <td>{user.createdAt}</td>
-                <td>
-                  <CButton color="info" variant="outline">
-                    Ver datos
-                  </CButton>
-                </td>
               </CTableRow>
             ))}
           </CTableBody>
