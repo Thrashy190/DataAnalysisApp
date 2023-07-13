@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CButton,
   CCard,
@@ -11,37 +11,19 @@ import {
   CTableHeaderCell,
   CTableRow,
 } from "@coreui/react";
+import { invoke } from "@tauri-apps/api/tauri";
+import { unix_to_date } from "../../../helpers/dateFormatter.js";
+import CheckCreateUserModal from "../Modals/CheckCreateUserModal.jsx";
+import Notification from "../../../helpers/Notifications.jsx";
 
-const UserListCard = () => {
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      identifier: "FGd123",
-      createdAt: "23/23/23",
-    },
-  ]);
+const UserListCard = ({ users, setUsers }) => {
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
-  //useEffect(() => {
-  //fetchUsers()
-  //}, [])
-
-  //const fetchUsers = async () => {
-  //try {
-  //const response = await axios.get('https://myapi.com/users')
-  //setUsers(response.data)
-  //} catch (error) {
-  //console.error(error)
-  //}
-  //}
-
-  //const handleDelete = async (id) => {
-  //try {
-  //await axios.delete(`https://myapi.com/users/${id}`)
-  //fetchUsers()
-  //} catch (error) {
-  //console.error(error)
-  //}
-  // }
+  const fetchUsers = async () => {
+    setUsers(await invoke("get_users"));
+  };
 
   return (
     <CCard className="mt-4">
@@ -53,6 +35,7 @@ const UserListCard = () => {
           <CTableHead>
             <CTableRow>
               <CTableHeaderCell>Identificador</CTableHeaderCell>
+              <CTableHeaderCell>Rol</CTableHeaderCell>
               <CTableHeaderCell>Fecha de creacion</CTableHeaderCell>
               <CTableHeaderCell></CTableHeaderCell>
               <CTableHeaderCell></CTableHeaderCell>
@@ -60,9 +43,10 @@ const UserListCard = () => {
           </CTableHead>
           <CTableBody>
             {users.map((user) => (
-              <CTableRow key={user.id}>
+              <CTableRow key={user.identifier}>
                 <td>{user.identifier}</td>
-                <td>{user.createdAt}</td>
+                <td>{user.role}</td>
+                <td>{unix_to_date(user.create_at)}</td>
                 <td>
                   <CButton color="primary" variant="outline">
                     Editar

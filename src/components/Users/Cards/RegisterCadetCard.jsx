@@ -11,14 +11,29 @@ import {
   CFormLabel,
   CRow,
 } from "@coreui/react";
-import CheckCreateUserModal from "../../Admin/Modals/CheckCreateUserModal.jsx";
+import Notification from "../../../helpers/Notifications.jsx";
+import CheckCreateCadetModal from "../Modals/CheckCreateCadetModal.jsx";
+import { now_date_to_unix } from "../../../helpers/dateFormatter.js";
 
 const RegisterCadetCard = () => {
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
   const [visibleCreate, setVisibleCreate] = useState(false);
   const [formValues, setFormValues] = useState({
     identifier: "",
-    password: "",
+    name: "",
+    birth: "",
+    level: "",
+    create_at: "",
   });
+
+  const openCheckModal = () => {
+    setFormValues({ ...formValues, create_at: now_date_to_unix() });
+    setVisibleCreate(true);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +43,10 @@ const RegisterCadetCard = () => {
   const handleClear = () => {
     setFormValues({
       identifier: "",
-      password: "",
+      name: "",
+      birth: "",
+      level: "",
+      create_at: "",
     });
   };
 
@@ -50,11 +68,31 @@ const RegisterCadetCard = () => {
               />
             </CCol>
             <CCol xs={12} md={4}>
-              <CFormLabel>Contraseña</CFormLabel>
+              <CFormLabel>Nombre</CFormLabel>
               <CFormInput
-                type="password"
-                name="password"
-                value={formValues.password}
+                type="text"
+                name="name"
+                value={formValues.name}
+                onChange={handleInputChange}
+              />
+            </CCol>
+            <CCol xs={12} md={4}>
+              <CFormLabel>Rango</CFormLabel>
+              <CFormInput
+                type="text"
+                name="level"
+                value={formValues.level}
+                onChange={handleInputChange}
+              />
+            </CCol>
+          </CRow>
+          <CRow>
+            <CCol xs={12} md={4}>
+              <CFormLabel>Edad</CFormLabel>
+              <CFormInput
+                type="text"
+                name="birth"
+                value={formValues.birth}
                 onChange={handleInputChange}
               />
             </CCol>
@@ -62,13 +100,10 @@ const RegisterCadetCard = () => {
           <CRow className="pt-4 ">
             <CCol className="d-flex justify-content-end gap-4">
               <CButton
-                disabled={
-                  formValues.password === "" && formValues.identifier === ""
-                }
                 variant="outline"
                 color="primary"
                 className="mr-2"
-                onClick={() => setVisibleCreate(!visibleCreate)}
+                onClick={() => openCheckModal()}
               >
                 Crear usuario
               </CButton>
@@ -84,11 +119,13 @@ const RegisterCadetCard = () => {
           </CRow>
         </CForm>
       </CCardBody>
-      <CheckCreateUserModal
-        user={formValues}
+      <CheckCreateCadetModal
+        formValues={formValues}
         visibleCreate={visibleCreate}
         setVisibleCreate={setVisibleCreate}
+        setNotify={setNotify}
       />
+      <Notification notify={notify} setNotify={setNotify} position={"top"} />
     </CCard>
   );
 };

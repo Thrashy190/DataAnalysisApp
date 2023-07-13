@@ -26,7 +26,7 @@ const RegisterDataCard = () => {
       </CCardHeader>
       <CCardBody>
         <CForm>
-          <CRow>
+          <CRow className="flex justify-between">
             <CCol xs={12} md={4}>
               <Autocomplete
                 disablePortal
