@@ -1,12 +1,26 @@
-import CCard from "@coreui/react";
-import CCardBody from "@coreui/react";
-import CCardTitle from "@coreui/react";
-import CCardText from "@coreui/react";
-import CButton from "@coreui/react";
+import {CCard, CCardBody, CCardTitle, CCardText, CButton, CBreadcrumb, CBreadcrumbItem} from "@coreui/react";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+
 
 const Cardd = () => {
   return (
-<div>Bb</div>
+<div class="shadow-2xl">
+<CCard className="text-center" style={{ width: '22rem'}}>
+  <CCardBody>
+    <CCardTitle>Inicio de Sesión</CCardTitle>
+    <CCardText>
+    <Box component="form" sx={{  '& > :not(style)': { m: 1, width: '25ch' } }}  noValidate autoComplete="off">
+      <TextField id="outlined-basic" label="Usuario" variant="outlined" />
+      <TextField type="password" id="outlined-basic" label="Contraseña" variant="outlined" />
+    </Box>
+    <input type="checkbox"/>
+    </CCardText>
+    <CButton href="#">Iniciar Sesión</CButton>
+  </CCardBody>
+</CCard>
+</div>
   );
 }
 

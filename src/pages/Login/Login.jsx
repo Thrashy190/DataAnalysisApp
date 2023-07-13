@@ -2,12 +2,12 @@ import Cardd from "../../Componentes/Cardd";
 
 const Login = () => {
   return (
-    <div className="bg-[#011e4a] h-screen">
-      <div>Login</div>
+    <div className="bg-[#011e4a] h-screen" >
+    <div class="d-flex justify-content-center align-items-center">
       <div>
-      <Cardd></Cardd>
+      <Cardd/>
       </div>
-      <div>Hola mundo</div>
+    </div>
     </div>
   );
 };
