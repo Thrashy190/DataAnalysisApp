@@ -1,4 +1,4 @@
-import Cardd from "../../Componentes/Cardd";
+import CardData from "../../Componentes/Cardd.jsx";
 
 const Login = () => {
   return (

@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
 
-const Cardd = () => {
+const CardData = () => {
   return (
 <div class="shadow-2xl">
 <CCard className="text-center" style={{ width: '22rem'}}>
@@ -22,6 +22,6 @@ const Cardd = () => {
 </CCard>
 </div>
   );
-}
+};
 
-export default Cardd;
+export default CardData;
