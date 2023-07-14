@@ -13,13 +13,22 @@ impl CadetService {
         Ok(Self { mongo_service })
     }
 
-    pub async fn get_cadets(&self) -> Result<Vec<Cadet>, Error> {
+    pub async fn get_cadet(&self,identifier: String) -> Result<Document, Error> {
+
+        let filter = doc! { "identifier": identifier };
+
+        let cadet = self.mongo_service.collection("cadets").find_one(filter,None).await?;
+
+        Ok(cadet.unwrap())
+    }
+
+    pub async fn get_cadets(&self) -> Result<Vec<Document>, Error> {
 
         let find_options = FindOptions::builder().sort(doc! { "create_at": -1 }).build();
 
         let cursor = self.mongo_service.collection("cadets").find(None,find_options).await?;
 
-        let cadets: Vec<Cadet> = cursor
+        let cadets: Vec<Document> = cursor
             .try_collect::<Vec<Document>>()
             .await?
             .into_iter()
@@ -32,9 +41,10 @@ impl CadetService {
     pub async fn create_cadet(&self, cadet:Cadet) -> Result<(), Error> {
         let user_doc = doc! {
             "identifier":&cadet.identifier,
-            "name":&cadet.name,
+            "genre":&cadet.genre,
             "level":&cadet.level,
             "birth":&cadet.birth,
+            "relationship":&cadet.relationship,
             "create_at":&cadet.create_at,
         };
 

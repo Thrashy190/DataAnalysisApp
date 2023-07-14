@@ -13,6 +13,7 @@ import {
 } from "@coreui/react";
 import { useNavigate } from "react-router-dom";
 import { invoke } from "@tauri-apps/api/tauri";
+import { unix_to_date } from "../../../helpers/dateFormatter.js";
 
 const CadetListCard = () => {
   const navigate = useNavigate();
@@ -40,19 +41,26 @@ const CadetListCard = () => {
           <CTableHead>
             <CTableRow>
               <CTableHeaderCell>Identificador</CTableHeaderCell>
+              <CTableHeaderCell>Genero</CTableHeaderCell>
+              <CTableHeaderCell>Estado civil</CTableHeaderCell>
+              <CTableHeaderCell>Rango</CTableHeaderCell>
               <CTableHeaderCell>Fecha de creacion</CTableHeaderCell>
+              <CTableHeaderCell></CTableHeaderCell>
             </CTableRow>
           </CTableHead>
           <CTableBody>
             {cadets.map((cadet) => (
               <CTableRow key={cadet.id} className="cursor-pointer">
                 <td>{cadet.identifier}</td>
-                <td>{cadet.create_at}</td>
+                <td>{cadet.genre}</td>
+                <td>{cadet.relationship}</td>
+                <td>{cadet.level}</td>
+                <td>{unix_to_date(cadet.create_at)}</td>
                 <td>
                   <CButton
                     color="primary"
                     variant="outline"
-                    onClick={() => handleCadetData(cadet.id)}
+                    onClick={() => handleCadetData(cadet.identifier)}
                   >
                     Ver datos
                   </CButton>

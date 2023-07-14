@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   CButton,
-  CFormCheck,
   CModal,
   CModalBody,
   CModalFooter,
@@ -17,7 +16,8 @@ const CheckCreateUserModal = ({
   setNotify,
 }) => {
   async function createUser() {
-    let result = await invoke("create_cadet", { cadet: formValues })
+    console.log(formValues);
+    let result = await invoke("create_cadets", { cadet: formValues })
       .then(() => {
         setNotify({
           isOpen: true,
@@ -29,7 +29,7 @@ const CheckCreateUserModal = ({
       .catch((err) => {
         setNotify({
           isOpen: true,
-          message: "Error al crear Cadete o Cadete ya existente",
+          message: err,
           type: "error",
         });
         setVisibleCreate(false);

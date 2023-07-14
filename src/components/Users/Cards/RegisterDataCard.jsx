@@ -38,7 +38,7 @@ const RegisterDataCard = () => {
                 )}
               />
             </CCol>
-            <CCol xs={12} md={4}>
+            <CCol xs={12} md={2}>
               <CButton variant="outline" color="primary" className="mr-2">
                 Guardar datos
               </CButton>

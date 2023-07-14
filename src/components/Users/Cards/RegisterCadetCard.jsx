@@ -9,6 +9,7 @@ import {
   CForm,
   CFormInput,
   CFormLabel,
+  CFormSelect,
   CRow,
 } from "@coreui/react";
 import Notification from "../../../helpers/Notifications.jsx";
@@ -25,9 +26,10 @@ const RegisterCadetCard = () => {
   const [formValues, setFormValues] = useState({
     identifier: "",
     name: "",
-    birth: "",
+    birth: null,
     level: "",
     create_at: "",
+    relationship: "",
   });
 
   const openCheckModal = () => {
@@ -37,16 +39,21 @@ const RegisterCadetCard = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+    if (name === "birth") {
+      setFormValues({ ...formValues, [name]: parseInt(value) });
+    } else {
+      setFormValues({ ...formValues, [name]: value });
+    }
   };
 
   const handleClear = () => {
     setFormValues({
       identifier: "",
-      name: "",
-      birth: "",
+      genre: "",
+      birth: null,
       level: "",
       create_at: "",
+      relationship: "",
     });
   };
 
@@ -68,33 +75,55 @@ const RegisterCadetCard = () => {
               />
             </CCol>
             <CCol xs={12} md={4}>
-              <CFormLabel>Nombre</CFormLabel>
-              <CFormInput
-                type="text"
-                name="name"
-                value={formValues.name}
+              <CFormLabel>Genero</CFormLabel>
+              <CFormSelect
+                aria-label="genre"
+                name="genre"
                 onChange={handleInputChange}
-              />
+              >
+                <option>Elige un genero</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+                <option value="O">Otros</option>
+              </CFormSelect>
             </CCol>
             <CCol xs={12} md={4}>
               <CFormLabel>Rango</CFormLabel>
-              <CFormInput
-                type="text"
+              <CFormSelect
+                aria-label="Level"
                 name="level"
-                value={formValues.level}
                 onChange={handleInputChange}
-              />
+              >
+                <option>Elige un rango</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </CFormSelect>
             </CCol>
           </CRow>
-          <CRow>
+          <CRow className="pt-4">
             <CCol xs={12} md={4}>
               <CFormLabel>Edad</CFormLabel>
               <CFormInput
-                type="text"
+                type="number"
                 name="birth"
                 value={formValues.birth}
                 onChange={handleInputChange}
               />
+            </CCol>
+            <CCol xs={12} md={4}>
+              <CFormLabel>Estado civil</CFormLabel>
+              <CFormSelect
+                aria-label="relationship"
+                name="relationship"
+                onChange={handleInputChange}
+              >
+                <option>Elige un estado civil</option>
+                <option value="Soltero">Soltero</option>
+                <option value="Casado">Casado</option>
+                <option value="Viudor">Viudo</option>
+              </CFormSelect>
             </CCol>
           </CRow>
           <CRow className="pt-4 ">

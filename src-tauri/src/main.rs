@@ -13,13 +13,12 @@ use tokio::{main};
 
 #[main]
 async fn main()  {
-
-
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             auth::create_user,
             user::get_users,
             cadet::get_cadets,
+            cadet::get_cadet,
             cadet::create_cadets
         ])
         .run(tauri::generate_context!())
