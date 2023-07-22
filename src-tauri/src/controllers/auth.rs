@@ -3,10 +3,24 @@ use crate::services::auth_service::AuthService;
 use crate::models::user_model::User;
 
 
-#[command]
-pub fn login(user: String,password:String) -> String {
-    format!("User: {}, Password: {}",user,password)
-}
+// #[command]
+// pub async fn login(identifier: String,password:String) -> Result<String, String>{
+//     println!("User: {}, Password: {}",identifier,password);
+
+//     let auth_service_result = AuthService::new().await;
+//     match auth_service_result {
+//         Ok(auth_service) => {
+//             let login_result = auth_service.login(user).await;
+
+//             match login_result {
+//                 Ok(()) => Ok("success".to_string()),
+//                 Err(_) => Err("error".to_string()),
+//             }
+//         }
+//         Err(_) => Err("error".to_string()),
+//     }
+
+// }
 
 #[command]
 pub async fn create_user(user:User) -> Result<String, String> {
@@ -22,9 +36,4 @@ pub async fn create_user(user:User) -> Result<String, String> {
         }
         Err(_) => Err("error".to_string()),
     }
-}
-
-#[command]
-pub fn sign_out(user: String,password:String) -> String {
-    format!("User: {}, Password: {}",user,password)
 }

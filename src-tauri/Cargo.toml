@@ -21,6 +21,7 @@ tokio = { version = "1", features = ["full"] }
 bcrypt = "0.15"
 futures-util = "0.3"
 chrono = "0.4.26"
+js-sys = "0.3.52"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem

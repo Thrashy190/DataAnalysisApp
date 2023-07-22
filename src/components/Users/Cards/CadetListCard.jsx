@@ -50,7 +50,7 @@ const CadetListCard = () => {
           </CTableHead>
           <CTableBody>
             {cadets.map((cadet) => (
-              <CTableRow key={cadet.id} className="cursor-pointer">
+              <CTableRow key={cadet.identifier} className="cursor-pointer">
                 <td>{cadet.identifier}</td>
                 <td>{cadet.genre}</td>
                 <td>{cadet.relationship}</td>

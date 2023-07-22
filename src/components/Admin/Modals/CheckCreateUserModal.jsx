@@ -49,9 +49,9 @@ const CheckCreateUserModal = ({
         <CModalTitle>Confirmar información</CModalTitle>
       </CModalHeader>
       <CModalBody>
-        <div>Identificador del usuario: </div>
+        <div className="text-lg font-semibold">Identificador del usuario: </div>
         <p>{formValues.identifier}</p>
-        <div>Rol del usuario: </div>
+        <div className="text-lg font-semibold">Rol del usuario: </div>
         <p>{formValues.role}</p>
       </CModalBody>
       <CModalFooter>

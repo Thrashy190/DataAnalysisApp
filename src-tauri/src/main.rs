@@ -19,7 +19,8 @@ async fn main()  {
             user::get_users,
             cadet::get_cadets,
             cadet::get_cadet,
-            cadet::create_cadets
+            cadet::create_cadets,
+            cadet::handle_dat_file
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

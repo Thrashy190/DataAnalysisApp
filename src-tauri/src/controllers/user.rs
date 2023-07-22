@@ -19,13 +19,3 @@ pub async fn get_users() -> Result<Vec<User>, String> {
         Err(_) => Err("error".to_string()),
     }
 }
-
-#[command]
-pub fn get_user_by_id(user: String,password:String) -> String {
-    format!("User: {}, Password: {}",user,password)
-}
-
-#[command]
-pub fn delete_user(user: String,password:String) -> String {
-    format!("User: {}, Password: {}",user,password)
-}

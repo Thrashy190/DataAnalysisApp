@@ -1,4 +1,4 @@
-use mongodb::{bson::{doc,Document}, error::Error, bson, options::FindOptions};
+use mongodb::{bson::{doc, Document}, error::Error, bson, options::FindOptions};
 use crate::database::mongo_service::MongoService;
 use futures_util::stream::TryStreamExt;
 use crate::models::cadet_model::Cadet;
@@ -51,5 +51,11 @@ impl CadetService {
         self.mongo_service.collection("cadets").insert_one(user_doc,None).await?;
         Ok(())
     }
+
+    pub async fn update_cadet(&self,update:Document, identifier:String) -> Result<(), Error> {
+        let cadet = self.mongo_service.collection::<Document>("cadets").update_one(doc! { "identifier": identifier },update,None).await?;
+        Ok(())
+    }
+
 
 }

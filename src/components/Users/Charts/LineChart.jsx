@@ -38,11 +38,27 @@ export const options = {
   },
 };
 
-function LineChart({ title, data }) {
+function LineChart({ stat }) {
+  const labels = stat.type.time;
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Dia 1",
+        data: stat.type.data,
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+    ],
+  };
+
   return (
     <CCard className="mt-4">
       <CCardHeader>
-        <CCardTitle className="text-lg font-semibold pt-2">{title}</CCardTitle>
+        <CCardTitle className="text-lg font-semibold pt-2">
+          {stat.type.title}
+        </CCardTitle>
       </CCardHeader>
       <CCardBody>
         <Line options={options} data={data} />

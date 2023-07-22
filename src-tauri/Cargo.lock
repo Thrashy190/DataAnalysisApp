@@ -2185,6 +2185,7 @@ dependencies = [
  "bcrypt",
  "chrono",
  "futures-util",
+ "js-sys",
  "mongodb",
  "serde",
  "serde_json",

@@ -46,13 +46,15 @@ const CheckCreateUserModal = ({
         <CModalTitle>Confirmar información</CModalTitle>
       </CModalHeader>
       <CModalBody>
-        <div>Identificador del cadete: </div>
+        <div className="text-lg font-semibold">Identificador del cadete: </div>
         <p>{formValues.identifier}</p>
-        <div>Nombre del cadete: </div>
-        <p>{formValues.name}</p>
-        <div>Rango del cadete: </div>
+        <div className="text-lg font-semibold">Genero del cadete: </div>
+        <p>{formValues.genre}</p>
+        <div className="text-lg font-semibold">Estado civil: </div>
+        <p>{formValues.relationship}</p>
+        <div className="text-lg font-semibold">Rango del cadete: </div>
         <p>{formValues.level}</p>
-        <div>Edad del cadete: </div>
+        <div className="text-lg font-semibold">Edad del cadete: </div>
         <p>{formValues.birth}</p>
       </CModalBody>
       <CModalFooter>
