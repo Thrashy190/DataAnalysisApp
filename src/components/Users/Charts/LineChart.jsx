@@ -10,14 +10,8 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import {
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCardTitle,
-  CCol,
-  CRow,
-} from "@coreui/react";
+import { CCard, CCardBody, CCardHeader, CCardTitle } from "@coreui/react";
+import { unix_to_date } from "../../../utils/dateFormatter.js";
 
 ChartJS.register(
   CategoryScale,
@@ -38,27 +32,43 @@ export const options = {
   },
 };
 
-function LineChart({ stat }) {
-  const labels = stat.type.time;
+const colors = [
+  [255, 99, 132],
+  [54, 162, 235],
+  [255, 206, 86],
+  [75, 192, 192],
+  [153, 102, 255],
+  [255, 159, 64],
+  [255, 99, 132],
+  [54, 162, 235],
+  [255, 206, 86],
+];
+
+function LineChart({ info, name }) {
+  let labels = info[0].time;
+
+  const datasets = info.map((data, index) => {
+    if (labels.length < data.time.length) {
+      labels = data.time;
+    }
+
+    return {
+      label: unix_to_date(data.date),
+      data: data.data,
+      borderColor: `rgb(${colors[index][0]}, ${colors[index][1]}, ${colors[index][2]})`,
+      backgroundColor: `rgb(${colors[index][0]}, ${colors[index][1]}, ${colors[index][2]},0.5)`,
+    };
+  });
 
   const data = {
     labels,
-    datasets: [
-      {
-        label: "Dia 1",
-        data: stat.type.data,
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-      },
-    ],
+    datasets,
   };
 
   return (
     <CCard className="mt-4">
       <CCardHeader>
-        <CCardTitle className="text-lg font-semibold pt-2">
-          {stat.type.title}
-        </CCardTitle>
+        <CCardTitle className="text-lg font-semibold pt-2">{name}</CCardTitle>
       </CCardHeader>
       <CCardBody>
         <Line options={options} data={data} />

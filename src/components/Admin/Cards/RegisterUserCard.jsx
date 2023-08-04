@@ -14,7 +14,7 @@ import {
 } from "@coreui/react";
 import CheckCreateUserModal from "../Modals/CheckCreateUserModal.jsx";
 import Notification from "../../../helpers/Notifications.jsx";
-import { now_date_to_unix } from "../../../helpers/dateFormatter.js";
+import { now_date_to_unix } from "../../../utils/dateFormatter.js";
 
 const RegisterUserCard = ({ users, setUsers }) => {
   const [canCreate, setCanCreate] = useState(false);

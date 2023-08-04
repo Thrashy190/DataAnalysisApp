@@ -7,6 +7,7 @@ import {
   cilSettings,
   cilPlus,
   cilClipboard,
+  cilUser,
 } from "@coreui/icons";
 import { CNavItem, CNavTitle } from "@coreui/react";
 
@@ -14,54 +15,55 @@ const _adminNav = [
   {
     component: CNavTitle,
     name: "Analisis",
+    roles: ["Admin", "Lector", "Analista", "Supervisor", "Operador"],
   },
   {
     component: CNavItem,
     name: "Cadetes",
     to: "/dashboard/cadets",
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-    role: "all",
+    roles: ["Admin", "Lector", "Analista", "Supervisor", "Operador"],
   },
   {
     component: CNavItem,
     name: "Procesar datos",
     to: "/dashboard/processData",
     icon: <CIcon icon={cilFolderOpen} customClassName="nav-icon" />,
-    role: "all",
+    roles: ["Admin", "Supervisor", "Operador"],
   },
   {
     component: CNavItem,
     name: "Agregar Cadete",
     to: "/dashboard/addCadet",
     icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
-    role: "all",
+    roles: ["Admin", "Supervisor", "Operador"],
   },
   {
     component: CNavTitle,
     name: "Administración",
-    role: "all",
+    roles: ["Admin", "Lector", "Analista", "Supervisor", "Operador"],
   },
   {
     component: CNavItem,
     name: "Administrar usuarios",
     to: "/dashboard/manageUsers",
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-    role: "admin",
+    roles: ["Admin"],
+  },
+  {
+    component: CNavItem,
+    name: "Perfil",
+    to: "/dashboard/profile",
+    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
+    roles: ["Admin", "Lector", "Analista", "Supervisor", "Operador"],
   },
   {
     component: CNavItem,
     name: "Ajustes",
     to: "/dashboard/settings",
     icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
-    role: "admin",
+    roles: ["Admin"],
   },
-  // {
-  //   component: CNavItem,
-  //   name: "Administrar campos",
-  //   to: "/dashboard/manageInputs",
-  //   icon: <CIcon icon={cilClipboard} customClassName="nav-icon" />,
-  //   role: "admin",
-  // },
 ];
 
 export default _adminNav;

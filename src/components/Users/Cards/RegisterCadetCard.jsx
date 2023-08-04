@@ -14,7 +14,7 @@ import {
 } from "@coreui/react";
 import Notification from "../../../helpers/Notifications.jsx";
 import CheckCreateCadetModal from "../Modals/CheckCreateCadetModal.jsx";
-import { now_date_to_unix } from "../../../helpers/dateFormatter.js";
+import { now_date_to_unix } from "../../../utils/dateFormatter.js";
 
 const RegisterCadetCard = () => {
   const [notify, setNotify] = useState({

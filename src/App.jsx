@@ -8,7 +8,8 @@ import Cadet from "./pages/Cadets/Cadet.jsx";
 import GenerateData from "./pages/Cadets/GenerateData.jsx";
 import AddCadet from "./pages/Cadets/AddCadet.jsx";
 import Settings from "./pages/Admin/Settings.jsx";
-import GenerateInputs from "./pages/Admin/GenerateInputs.jsx";
+import ProtectedRoute from "./helpers/ProtectedRoute.jsx";
+import Profile from "./pages/Admin/Profile.jsx";
 
 function App() {
   return (
@@ -16,14 +17,17 @@ function App() {
       <Routes>
         <Route index element={<Login />} />
         <Route path="login" element={<Login />} />
-        <Route path="dashboard" element={<DashboardLayout />}>
-          <Route path="cadets" element={<Cadets />} />
-          <Route path="cadets/:id" element={<Cadet />} />
-          <Route path="processData" element={<GenerateData />} />
-          <Route path="addCadet" element={<AddCadet />} />
-          <Route path="manageUsers" element={<Users />} />
-          <Route path="settings" element={<Settings />} />
-          {/* <Route path="manageInputs" element={<GenerateInputs />} /> */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="dashboard" element={<DashboardLayout />}>
+            <Route path="cadets" element={<Cadets />} />
+            <Route path="cadets/:id" element={<Cadet />} />
+            <Route path="processData" element={<GenerateData />} />
+            <Route path="addCadet" element={<AddCadet />} />
+            <Route path="manageUsers" element={<Users />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="settings" element={<Settings />} />
+            {/* <Route path="manageInputs" element={<GenerateInputs />} /> */}
+          </Route>
         </Route>
       </Routes>
     </div>

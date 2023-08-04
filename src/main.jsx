@@ -8,15 +8,19 @@ import App from "./App.jsx";
 import "./styles.css";
 import store from "./store";
 import AuthProvider from "./context/AuthProvider.jsx";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
       <BrowserRouter>
-        <Provider store={store}>
-          <App />
-        </Provider>
+        <AuthProvider>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </AuthProvider>
       </BrowserRouter>
-    </AuthProvider>
+    </LocalizationProvider>
   </React.StrictMode>
 );

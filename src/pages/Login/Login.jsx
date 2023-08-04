@@ -7,7 +7,6 @@ import { useAuth } from "../../context/AuthProvider.jsx";
 import cinvestavLogo from "../../assets/logo_cinvestav_blanco.png";
 
 const Login = () => {
-  const navigate = useNavigate();
   const [userData, setUserData] = useState({});
 
   const { login } = useAuth();
@@ -56,7 +55,6 @@ const Login = () => {
                   color="primary"
                   onClick={() => {
                     login(userData);
-                    navigate("dashboard/cadets");
                   }}
                 >
                   Entrar

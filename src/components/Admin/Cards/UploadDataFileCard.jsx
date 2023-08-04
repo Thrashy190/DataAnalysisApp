@@ -1,15 +1,37 @@
-import { CCard, CCardBody, CCardHeader, CCardTitle } from "@coreui/react";
+import {
+  CCard,
+  CCardBody,
+  CCardHeader,
+  CCardTitle,
+  CFormSelect,
+} from "@coreui/react";
 import React, { useState } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import Notification from "../../../helpers/Notifications.jsx";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import TextField from "@mui/material/TextField";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-const UploadDataFileCard = ({ identifier }) => {
+const UploadDataFileCard = ({ identifier, processData }) => {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
     type: "",
   });
   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedDate, setSelectedDate] = useState();
+  const [date, setDate] = useState();
+  const [name, setName] = useState("");
+
+  const handleChange = (newValue) => {
+    setSelectedDate(newValue);
+    setDate(newValue.unix());
+  };
+
+  const handleInputChange = (e) => {
+    const { value } = e.target;
+    setName(value);
+  };
 
   const onDrop = (event) => {
     event.preventDefault();
@@ -41,16 +63,16 @@ const UploadDataFileCard = ({ identifier }) => {
     const reader = new FileReader();
 
     reader.onload = async (e) => {
-      console.log([...new Uint8Array(e.target.result)]);
       await invoke("handle_dat_file", {
-        name: file.name,
+        date: date,
+        process: name,
         identifier: identifier,
         data: [...new Uint8Array(e.target.result)],
       })
         .then(() => {
           setNotify({
             isOpen: true,
-            message: `Archivo ${file.name} subido con éxito para el cadete ${identifier}.`,
+            message: `Archivo ${file.name} cargado con éxito para el cadete ${identifier}.`,
             type: "success",
           });
           setSelectedFile(null);
@@ -71,10 +93,10 @@ const UploadDataFileCard = ({ identifier }) => {
   return (
     <CCard className="mt-4">
       <CCardHeader>
-        <CCardTitle className="pt-2">Upload file</CCardTitle>
+        <CCardTitle className="pt-2">Subir archivo</CCardTitle>
       </CCardHeader>
-      <CCardBody>
-        <div className="flex items-center justify-center w-full">
+      <CCardBody className="grid grid-cols-3 gap-4">
+        <div className="flex items-center justify-center w-full col-span-2">
           <div className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
             {selectedFile ? (
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
@@ -154,6 +176,38 @@ const UploadDataFileCard = ({ identifier }) => {
                 />
               </label>
             )}
+          </div>
+        </div>
+
+        <div>
+          <div className="pb-4">
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Proceso</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={name}
+                label="Proceso"
+                onChange={handleInputChange}
+              >
+                {processData.map((data, index) => {
+                  return (
+                    <MenuItem key={index} value={data.title}>
+                      {data.name}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          </div>
+          <div>
+            <DateTimePicker
+              width="100%"
+              label="Fecha y hora de la prueba"
+              value={selectedDate}
+              onChange={handleChange}
+              renderInput={(params) => <TextField {...params} />}
+            />
           </div>
         </div>
       </CCardBody>

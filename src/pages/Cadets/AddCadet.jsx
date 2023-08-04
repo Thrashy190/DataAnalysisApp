@@ -5,7 +5,7 @@ import React from "react";
 const AddCadet = () => {
   return (
     <CContainer>
-      {/**/} <RegisterCadetCard />
+      <RegisterCadetCard />
     </CContainer>
   );
 };

@@ -5,11 +5,15 @@ import CadetDataCard from "../../components/Users/Cards/CadetDataCard.jsx";
 import { invoke } from "@tauri-apps/api/tauri";
 import LineChart from "../../components/Users/Charts/LineChart.jsx";
 import LinearProgress from "@mui/material/LinearProgress";
+import processData from "../../config/process.json";
 
 const Cadet = () => {
   const idCadet = useParams();
 
-  const [cadet, setCadet] = useState({ stats: [] });
+  const [cadet, setCadet] = useState({
+    stress: [{ time: [], data: [], date: "" }],
+    hearth_rythm: [{ time: [], data: [], date: "" }],
+  });
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -18,7 +22,9 @@ const Cadet = () => {
   }, []);
 
   const fetchCadet = async () => {
-    setCadet(await invoke("get_cadet", { identifier: idCadet.id }));
+    const cadet = await invoke("get_cadet", { identifier: idCadet.id });
+    console.log(cadet);
+    setCadet(cadet);
   };
 
   return (
@@ -28,10 +34,10 @@ const Cadet = () => {
       ) : (
         <div>
           <CadetDataCard cadet={cadet} />
-          {cadet.stats &&
-            cadet.stats.map((stat) => {
-              return <LineChart stat={stat} />;
-            })}
+          {cadet.stress && <LineChart info={cadet.stress} name="Estres" />}
+          {cadet.hearth_rythm && (
+            <LineChart info={cadet.hearth_rythm} name="Ritmo cardiaco" />
+          )}
         </div>
       )}
     </CContainer>

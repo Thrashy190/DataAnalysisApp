@@ -7,27 +7,52 @@ import React, {
 } from "react";
 import Notification from "../helpers/Notifications.jsx";
 import { invoke } from "@tauri-apps/api/tauri";
+import { useNavigate } from "react-router-dom";
 
 const UserContext = createContext();
 
 export const useAuth = () => useContext(UserContext);
 
 const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState();
+  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState(null);
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
     type: "",
   });
 
+  const logOut = () => {
+    setCurrentUser(null);
+    navigate("/");
+  };
+
   const login = async (user) => {
-    console.log("login");
-    await invoke("login", user);
+    await invoke("login", user)
+      .then((res) => {
+        setCurrentUser(res);
+        setNotify({
+          isOpen: true,
+          message: "Inicio sesion correctamente",
+          type: "success",
+        });
+        navigate("dashboard/cadets");
+      })
+      .catch((err) => {
+        setNotify({
+          isOpen: true,
+          message: err,
+          type: "error",
+        });
+      });
+
+    //await invoke("login", user);
   };
 
   const values = {
     currentUser,
     login,
+    logOut,
   };
 
   return (

@@ -1,26 +1,27 @@
+use mongodb::bson::Document;
 use tauri::{command};
+use crate::models::auth_model::AuthLogin;
 use crate::services::auth_service::AuthService;
 use crate::models::user_model::User;
 
 
-// #[command]
-// pub async fn login(identifier: String,password:String) -> Result<String, String>{
-//     println!("User: {}, Password: {}",identifier,password);
+#[command]
+pub async fn login(identifier:String,password:String) -> Result<Document, String>{
 
-//     let auth_service_result = AuthService::new().await;
-//     match auth_service_result {
-//         Ok(auth_service) => {
-//             let login_result = auth_service.login(user).await;
+     let auth_service_result = AuthService::new().await;
+     match auth_service_result {
+         Ok(auth_service) => {
+             let login_result = auth_service.login(identifier,password).await;
 
-//             match login_result {
-//                 Ok(()) => Ok("success".to_string()),
-//                 Err(_) => Err("error".to_string()),
-//             }
-//         }
-//         Err(_) => Err("error".to_string()),
-//     }
+             match login_result {
+                 Ok(data) => Ok(data),
+                 Err(e) => Err(e),
+             }
+         }
+         Err(e) => Err(e.to_string()),
+     }
 
-// }
+ }
 
 #[command]
 pub async fn create_user(user:User) -> Result<String, String> {

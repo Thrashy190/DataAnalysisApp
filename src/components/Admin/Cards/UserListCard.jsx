@@ -12,7 +12,7 @@ import {
   CTableRow,
 } from "@coreui/react";
 import { invoke } from "@tauri-apps/api/tauri";
-import { unix_to_date } from "../../../helpers/dateFormatter.js";
+import { unix_to_date } from "../../../utils/dateFormatter.js";
 import CheckCreateUserModal from "../Modals/CheckCreateUserModal.jsx";
 import Notification from "../../../helpers/Notifications.jsx";
 

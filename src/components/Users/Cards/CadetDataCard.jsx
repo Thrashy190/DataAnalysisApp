@@ -7,7 +7,7 @@ import {
   CRow,
 } from "@coreui/react";
 import React from "react";
-import { unix_to_date } from "../../../helpers/dateFormatter.js";
+import { unix_to_date } from "../../../utils/dateFormatter.js";
 
 const CadetDataCard = ({ cadet }) => {
   return (

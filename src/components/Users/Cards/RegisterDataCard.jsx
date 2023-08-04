@@ -12,7 +12,7 @@ import {
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { invoke } from "@tauri-apps/api/tauri";
-import { unix_to_date } from "../../../helpers/dateFormatter.js";
+import { unix_to_date } from "../../../utils/dateFormatter.js";
 
 const RegisterDataCard = ({ cadetId, setCadetId, cadet, setCadet }) => {
   const [cadets, setCadets] = useState([]);
@@ -32,7 +32,9 @@ const RegisterDataCard = ({ cadetId, setCadetId, cadet, setCadet }) => {
   return (
     <CCard className="mt-4">
       <CCardHeader>
-        <CCardTitle className="pt-2">Agregar Datos a cadete</CCardTitle>
+        <CCardTitle className="pt-2">
+          Agregar Archivos/evidencia del cadete
+        </CCardTitle>
       </CCardHeader>
       <CCardBody>
         <CForm>

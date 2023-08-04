@@ -1,7 +1,10 @@
-use mongodb::{bson::{doc},error::Error};
+use mongodb::{bson::{doc,Document},error::Error,options::FindOneOptions};
 use crate::models::user_model::User;
 use crate::database::mongo_service::MongoService;
 use crate::helper::{hash_text};
+use crate::models::auth_model::AuthLogin;
+use bcrypt;
+use bcrypt::{BcryptResult, verify};
 
 pub struct AuthService {
     mongo_service: MongoService,
@@ -13,27 +16,29 @@ impl AuthService {
         Ok(Self { mongo_service })
     }
 
-    // pub async fn login(&self, user:User) -> Result<(), Error> {
-    //     //compare input password and db password
-    //     let user_doc = doc! {
-    //         "identifier": &user.identifier,
-    //     };
-    //     let user_result = self.mongo_service.collection("users").find_one(user_doc,None).await?;
 
-    //     match user_result {
-    //         Some(user_doc) => {
-    //             let db_password = user_doc.get_str("password").unwrap();
-    //             let input_password = &user.password;
-    //             let is_match = bcrypt::verify(input_password, db_password).unwrap();
-    //             if is_match {
-    //                 Ok(())
-    //             } else {
-    //                 Err(Error::AuthenticationError("Password is not match".to_string()))
-    //             }
-    //         }
-    //         None => Err(Error::AuthenticationError("User not found".to_string())),
-    //     }
-    // }
+    pub async fn login(&self, identifier:String, password:String) -> Result<Document, String> {
+        //compare input password and db password
+        let filter:Document = doc! {
+             "identifier": identifier,
+         };
+        let options:FindOneOptions = FindOneOptions::builder().projection(doc! {"_id": 0}).build();
+        let user: Option<Document> = self.mongo_service.collection("users").find_one(filter,options).await.map_err(|e| e.to_string())?;
+
+        if let Some(user_doc) = user {
+            let stored_password = user_doc.get_str("password").unwrap_or_default();
+            let verify_result =verify(password, stored_password).map_err(|e| e.to_string())?;
+
+            if verify_result {
+                Ok(user_doc)
+            } else {
+                Err("Contraseña incorrecta".to_string())
+            }
+
+        } else {
+            Err("Usuario no encontrado".to_string())
+        }
+    }
 
     pub async fn signup(&self, user:User) -> Result<(), Error> {
         match hash_text(&user.password, 4) {
