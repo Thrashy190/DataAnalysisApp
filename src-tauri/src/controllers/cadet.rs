@@ -59,7 +59,7 @@ pub async fn create_cadets(cadet:Cadet) -> Result<String, String> {
 
 
 #[command]
-    pub async fn handle_dat_file(date:i64, identifier:String, data:Vec<u8>,process:String) ->  Result<String, String>{
+pub async fn handle_dat_file(date:i64, identifier:String, data:Vec<u8>,process:String) ->  Result<String, String>{
 
     let file_content = String::from_utf8_lossy(&data);
 
@@ -104,17 +104,4 @@ pub async fn create_cadets(cadet:Cadet) -> Result<String, String> {
     }
 }
 
-//let directory_path = "C:/Users/diego/Documents/proyectos/cinvestav/files";
 
-//let parts = name.split("-");
-//let title = parts.clone().collect::<Vec<&str>>()[0];
-//let date = parts.clone().collect::<Vec<&str>>()[2];
-
-//let file_path = format!("{}/{}", directory_path, name);
-
-//fs::write(&file_path, &data).expect("Error al escribir el archivo");
-
-
-//let mut read_buffer = Vec::new();
-//let mut read_file = fs::File::open(&file_path).expect("Error al abrir el archivo");
-//read_file.read_to_end(&mut read_buffer).expect("Error al leer el archivo");

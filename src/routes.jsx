@@ -7,6 +7,7 @@ import {
   cilSettings,
   cilPlus,
   cilClipboard,
+  cilAccountLogout,
   cilUser,
 } from "@coreui/icons";
 import { CNavItem, CNavTitle } from "@coreui/react";
@@ -41,7 +42,7 @@ const _adminNav = [
   {
     component: CNavTitle,
     name: "Administración",
-    roles: ["Admin", "Lector", "Analista", "Supervisor", "Operador"],
+    roles: ["Admin"],
   },
   {
     component: CNavItem,
@@ -52,17 +53,22 @@ const _adminNav = [
   },
   {
     component: CNavItem,
-    name: "Perfil",
-    to: "/dashboard/profile",
-    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
-    roles: ["Admin", "Lector", "Analista", "Supervisor", "Operador"],
-  },
-  {
-    component: CNavItem,
     name: "Ajustes",
     to: "/dashboard/settings",
     icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
     roles: ["Admin"],
+  },
+  {
+    component: CNavTitle,
+    name: "Sesión",
+    roles: ["Admin", "Lector", "Analista", "Supervisor", "Operador"],
+  },
+  {
+    component: CNavItem,
+    name: "Cerrar sesión",
+    to: "/login",
+    icon: <CIcon icon={cilAccountLogout} customClassName="nav-icon" />,
+    roles: ["Admin", "Lector", "Analista", "Supervisor", "Operador"],
   },
 ];
 

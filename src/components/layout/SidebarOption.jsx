@@ -2,11 +2,10 @@ import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useAuth } from "../../context/AuthProvider.jsx";
-import { CBadge } from "@coreui/react";
 
 export const AppSidebarNav = ({ items }) => {
   const location = useLocation();
-  const { currentUser } = useAuth();
+  const { currentUser, logOut } = useAuth();
 
   const navLink = (name, icon) => {
     return (
@@ -20,6 +19,25 @@ export const AppSidebarNav = ({ items }) => {
   const navItem = (item, index) => {
     const { component, name, icon, ...rest } = item;
     const Component = component;
+
+    if (name === "Cerrar sesión") {
+      return (
+        <Component
+          onClick={() => {
+            logOut();
+          }}
+          {...(rest.to &&
+            !rest.items && {
+              component: NavLink,
+            })}
+          key={index}
+          {...rest}
+        >
+          {navLink(name, icon)}
+        </Component>
+      );
+    }
+
     return (
       <Component
         {...(rest.to &&

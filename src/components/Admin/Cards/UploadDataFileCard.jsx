@@ -1,10 +1,4 @@
-import {
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCardTitle,
-  CFormSelect,
-} from "@coreui/react";
+import { CCard, CCardBody, CCardHeader, CCardTitle } from "@coreui/react";
 import React, { useState } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import Notification from "../../../helpers/Notifications.jsx";
@@ -13,15 +7,15 @@ import TextField from "@mui/material/TextField";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 const UploadDataFileCard = ({ identifier, processData }) => {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedDate, setSelectedDate] = useState();
+  const [date, setDate] = useState();
+  const [name, setName] = useState("");
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
     type: "",
   });
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [selectedDate, setSelectedDate] = useState();
-  const [date, setDate] = useState();
-  const [name, setName] = useState("");
 
   const handleChange = (newValue) => {
     setSelectedDate(newValue);
@@ -63,6 +57,7 @@ const UploadDataFileCard = ({ identifier, processData }) => {
     const reader = new FileReader();
 
     reader.onload = async (e) => {
+      console.log(e);
       await invoke("handle_dat_file", {
         date: date,
         process: name,
@@ -118,7 +113,7 @@ const UploadDataFileCard = ({ identifier, processData }) => {
                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                   Archivo seleccionado:
                   <span className="pl-1 font-semibold">
-                    {selectedFile.name}
+                    {selectedFile.files[0].name}
                   </span>
                 </p>
                 <button

@@ -9,7 +9,6 @@ import GenerateData from "./pages/Cadets/GenerateData.jsx";
 import AddCadet from "./pages/Cadets/AddCadet.jsx";
 import Settings from "./pages/Admin/Settings.jsx";
 import ProtectedRoute from "./helpers/ProtectedRoute.jsx";
-import Profile from "./pages/Admin/Profile.jsx";
 
 function App() {
   return (
@@ -24,7 +23,6 @@ function App() {
             <Route path="processData" element={<GenerateData />} />
             <Route path="addCadet" element={<AddCadet />} />
             <Route path="manageUsers" element={<Users />} />
-            <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />
             {/* <Route path="manageInputs" element={<GenerateInputs />} /> */}
           </Route>
