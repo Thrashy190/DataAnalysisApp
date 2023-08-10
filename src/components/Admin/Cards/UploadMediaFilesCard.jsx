@@ -60,7 +60,6 @@ const UploadMediaFilesCard = ({ identifier }) => {
 
       fileReader.readAsArrayBuffer(file);
     }
-    console.log(selectedFiles.length);
     setSelectedFiles([]);
   };
 
@@ -70,6 +69,14 @@ const UploadMediaFilesCard = ({ identifier }) => {
         <CCardTitle className="pt-2">Subir archivos multimedia</CCardTitle>
       </CCardHeader>
       <CCardBody className="flex flex-col">
+        <div>
+          <button
+            className="px-4 py-2 mb-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+            onClick={readFiles}
+          >
+            Subir archivos
+          </button>
+        </div>
         <div className="flex flex-col">
           <div className="mb-2 flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
             <label htmlFor="dropzone-file">
@@ -113,14 +120,6 @@ const UploadMediaFilesCard = ({ identifier }) => {
               />
             </label>
           </div>
-        </div>
-        <div>
-          <button
-            className="px-4 py-2 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-            onClick={readFiles}
-          >
-            Subir archivos
-          </button>
         </div>
       </CCardBody>
       <Notification notify={notify} setNotify={setNotify} position={"top"} />

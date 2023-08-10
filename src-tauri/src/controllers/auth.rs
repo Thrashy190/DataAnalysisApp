@@ -1,6 +1,5 @@
 use mongodb::bson::Document;
 use tauri::{command};
-use crate::models::auth_model::AuthLogin;
 use crate::services::auth_service::AuthService;
 use crate::models::user_model::User;
 

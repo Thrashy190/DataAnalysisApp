@@ -5,7 +5,7 @@ import CadetDataCard from "../../components/Users/Cards/CadetDataCard.jsx";
 import { invoke } from "@tauri-apps/api/tauri";
 import LineChart from "../../components/Users/Charts/LineChart.jsx";
 import LinearProgress from "@mui/material/LinearProgress";
-import UploadMediaFilesCard from "../../components/Admin/Cards/UploadMediaFilesCard.jsx";
+import CadetImageVideoCard from "../../components/Users/Cards/CadetImageVideoCard.jsx";
 
 const Cadet = () => {
   const idCadet = useParams();
@@ -23,7 +23,6 @@ const Cadet = () => {
 
   const fetchCadet = async () => {
     const cadet = await invoke("get_cadet", { identifier: idCadet.id });
-    console.log(cadet);
     setCadet(cadet);
   };
 
@@ -74,7 +73,7 @@ const Cadet = () => {
                     )}
                   </div>
                 ) : (
-                  <div>hola</div>
+                  <CadetImageVideoCard identifier={cadet.identifier} />
                 )}
               </CCol>
             </CRow>

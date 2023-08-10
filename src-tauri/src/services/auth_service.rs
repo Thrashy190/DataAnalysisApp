@@ -2,9 +2,8 @@ use mongodb::{bson::{doc,Document},error::Error,options::FindOneOptions};
 use crate::models::user_model::User;
 use crate::database::mongo_service::MongoService;
 use crate::helper::{hash_text};
-use crate::models::auth_model::AuthLogin;
 use bcrypt;
-use bcrypt::{BcryptResult, verify};
+use bcrypt::verify;
 
 pub struct AuthService {
     mongo_service: MongoService,

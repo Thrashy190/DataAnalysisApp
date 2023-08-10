@@ -16,7 +16,6 @@ const CheckCreateUserModal = ({
   setNotify,
 }) => {
   async function createUser() {
-    console.log(formValues);
     let result = await invoke("create_cadets", { cadet: formValues })
       .then(() => {
         setNotify({

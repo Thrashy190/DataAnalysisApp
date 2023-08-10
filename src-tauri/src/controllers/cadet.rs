@@ -1,7 +1,5 @@
 use mongodb::bson::{doc, Document};
 use tauri::{command};
-use std::fs;
-use std::io::Read;
 
 use crate::models::cadet_model::Cadet;
 use crate::services::cadet_service::CadetService;

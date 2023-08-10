@@ -32,11 +32,6 @@ const UploadDataFileCard = ({ identifier, processData }) => {
     const file = event.dataTransfer.files[0];
     if (file && file.name.endsWith(".dat")) {
       setSelectedFile(file);
-      console.log(file);
-    } else {
-      console.log(
-        "Tipo de archivo no válido. Solo se permite un archivo .dat."
-      );
     }
   };
 
@@ -57,7 +52,6 @@ const UploadDataFileCard = ({ identifier, processData }) => {
     const reader = new FileReader();
 
     reader.onload = async (e) => {
-      console.log(e);
       await invoke("handle_dat_file", {
         date: date,
         process: name,

@@ -53,7 +53,7 @@ impl CadetService {
     }
 
     pub async fn update_cadet(&self,update:Document, identifier:String) -> Result<(), Error> {
-        let cadet = self.mongo_service.collection::<Document>("cadets").update_one(doc! { "identifier": identifier },update,None).await?;
+        let _cadet = self.mongo_service.collection::<Document>("cadets").update_one(doc! { "identifier": identifier },update,None).await?;
         Ok(())
     }
 
