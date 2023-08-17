@@ -3,17 +3,16 @@ import { CButton, CButtonGroup, CCol, CContainer, CRow } from "@coreui/react";
 import React, { useEffect, useState } from "react";
 import CadetDataCard from "../../components/Users/Cards/CadetDataCard.jsx";
 import { invoke } from "@tauri-apps/api/tauri";
-import LineChart from "../../components/Users/Charts/LineChart.jsx";
 import LinearProgress from "@mui/material/LinearProgress";
 import CadetImageVideoCard from "../../components/Users/Cards/CadetImageVideoCard.jsx";
+import CadetTextFileCard from "../../components/Users/Cards/CadetTextFileCard.jsx";
+import processData from "../../config/process.json";
+import LinePlot from "../../components/Users/Charts/LinePlot.jsx";
 
 const Cadet = () => {
   const idCadet = useParams();
   const [type, setType] = useState("data");
-  const [cadet, setCadet] = useState({
-    stress: [{ time: [], data: [], date: "" }],
-    hearth_rythm: [{ time: [], data: [], date: "" }],
-  });
+  const [cadet, setCadet] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -55,6 +54,15 @@ const Cadet = () => {
                   >
                     Archivos multimedia
                   </CButton>
+                  <CButton
+                    onClick={() => {
+                      setType("text");
+                    }}
+                    color="primary"
+                    variant="outline"
+                  >
+                    Archivos de text
+                  </CButton>
                 </CButtonGroup>
               </CCol>
             </CRow>
@@ -62,18 +70,22 @@ const Cadet = () => {
               <CCol xs={12} md={12}>
                 {type === "data" ? (
                   <div>
-                    {cadet.stress && (
-                      <LineChart info={cadet.stress} name="Estres" />
-                    )}
-                    {cadet.hearth_rythm && (
-                      <LineChart
-                        info={cadet.hearth_rythm}
-                        name="Ritmo cardiaco"
-                      />
-                    )}
+                    {processData.map((process, index) => {
+                      return (
+                        cadet[process.title] && (
+                          <LinePlot
+                            key={index}
+                            info={cadet[process.title]}
+                            name={process.name}
+                          />
+                        )
+                      );
+                    })}
                   </div>
-                ) : (
+                ) : type === "multi" ? (
                   <CadetImageVideoCard identifier={cadet.identifier} />
+                ) : (
+                  <CadetTextFileCard identifier={cadet.identifier} />
                 )}
               </CCol>
             </CRow>

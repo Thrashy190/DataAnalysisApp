@@ -12,6 +12,8 @@ import { convertFileSrc } from "@tauri-apps/api/tauri";
 const ShowMediaModal = ({ visibleCreate, setVisibleCreate, data }) => {
   return (
     <CModal
+      size="xl"
+      backdrop="static"
       alignment="center"
       visible={visibleCreate}
       onClose={() => setVisibleCreate(false)}
@@ -21,9 +23,17 @@ const ShowMediaModal = ({ visibleCreate, setVisibleCreate, data }) => {
       </CModalHeader>
       <CModalBody>
         {data.name.includes(".mp4") ? (
-          <video src={convertFileSrc(data.path)} controls />
+          <video
+            className="h-max w-max"
+            src={convertFileSrc(data.path)}
+            controls
+          />
         ) : (
-          <img src={convertFileSrc(data.path)} alt={data.name} />
+          <img
+            className="h-max w-max"
+            src={convertFileSrc(data.path)}
+            alt={data.name}
+          />
         )}
       </CModalBody>
       <CModalFooter>

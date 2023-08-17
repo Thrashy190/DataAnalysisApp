@@ -25,10 +25,13 @@ const UploadMediaFilesCard = ({ identifier }) => {
   const readFiles = async () => {
     const documentDirPath = await documentDir();
 
-    await createDir(`${documentDirPath}cinvestav\\cadetes\\${identifier}`, {
-      dir: BaseDirectory.Document,
-      recursive: true,
-    });
+    await createDir(
+      `${documentDirPath}cinvestav\\cadetes\\${identifier}\\multimedia`,
+      {
+        dir: BaseDirectory.Document,
+        recursive: true,
+      }
+    );
 
     for (let i = 0; i < selectedFiles.length; i++) {
       const fileReader = new FileReader();
@@ -36,7 +39,7 @@ const UploadMediaFilesCard = ({ identifier }) => {
 
       fileReader.onload = async (e) => {
         await writeBinaryFile(
-          `${documentDirPath}cinvestav\\cadetes\\${identifier}\\${file.name}`,
+          `${documentDirPath}cinvestav\\cadetes\\${identifier}\\multimedia\\${file.name}`,
           new Uint8Array(e.target.result),
           {
             dir: BaseDirectory.Document,
@@ -97,8 +100,7 @@ const UploadMediaFilesCard = ({ identifier }) => {
                   />
                 </svg>
                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Haz click para subir</span> o
-                  arrastra y suelta archivos
+                  <span className="font-semibold">Haz click para subir</span>
                 </p>
                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                   Archivos en total:

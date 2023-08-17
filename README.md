@@ -1,7 +1,5 @@
 # Police Data Analysis App
 
-
-
 This project is being developed with the purpose of analyzing/visualizing driving data from police school cadets, analyzing different parameters such as heart rate, stress levels, attention, etc. 
 
 The main purpose of the application is to facilitate the management of this data and its visualization of the parameters collected from the cadets, as well as the audiovisual resources (Video, Images, Files) captured at the time of the tests.
@@ -18,6 +16,8 @@ The main purpose of the application is to facilitate the management of this data
 
 First of all, you need to install `Rust` and `NodeJS`
 
-### Installation on Windows
+### Installation for Windows
 
 1. Install the [MSVC C++ toolchain](https://visualstudio.microsoft.com/visual-cpp-build-tools/) and then [Rust](https://www.rust-lang.org/es/tools/install)
+2. Install [Node.js](https://nodejs.org/es/) version 18.16.0 or higher
+3. Install [MongoDB](https://www.mongodb.com/try/download/community) version 5.0.3 or higher

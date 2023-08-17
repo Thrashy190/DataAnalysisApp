@@ -1,9 +1,10 @@
 import { CButton, CButtonGroup, CCol, CContainer, CRow } from "@coreui/react";
 import RegisterDataCard from "../../components/Users/Cards/RegisterDataCard.jsx";
 import React, { useState } from "react";
-import UploadDataFileCard from "../../components/Admin/Cards/UploadDataFileCard.jsx";
+import UploadDataFileCard from "../../components/Users/Cards/UploadDataFileCard.jsx";
 import processData from "../../config/process.json";
-import UploadMediaFilesCard from "../../components/Admin/Cards/UploadMediaFilesCard.jsx";
+import UploadMediaFilesCard from "../../components/Users/Cards/UploadMediaFilesCard.jsx";
+import UploadTextFilesCard from "../../components/Users/Cards/UploadTextFilesCard.jsx";
 
 const GenerateData = () => {
   const [cadetId, setCadetId] = useState("");
@@ -41,6 +42,15 @@ const GenerateData = () => {
                 >
                   Archivos multimedia
                 </CButton>
+                <CButton
+                  onClick={() => {
+                    setType("text");
+                  }}
+                  color="primary"
+                  variant="outline"
+                >
+                  Archivos de texto (notas)
+                </CButton>
               </CButtonGroup>
             </CCol>
           </CRow>
@@ -51,8 +61,10 @@ const GenerateData = () => {
                   identifier={cadetId}
                   processData={processData}
                 />
-              ) : (
+              ) : type === "multi" ? (
                 <UploadMediaFilesCard identifier={cadetId} />
+              ) : (
+                <UploadTextFilesCard identifier={cadetId} />
               )}
             </CCol>
           </CRow>

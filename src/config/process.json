@@ -2,11 +2,11 @@
   {
     "name": "Estres",
     "title": "stress",
-    "type": "LineChart"
+    "type": "LinePlot"
   },
   {
     "name": "Ritmo cardiaco",
     "title": "hearth_rythm",
-    "type": "LineChart"
+    "type": "LinePlot"
   }
 ]
