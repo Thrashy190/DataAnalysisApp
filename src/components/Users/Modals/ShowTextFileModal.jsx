@@ -39,6 +39,7 @@ const ShowTextFileModal = ({
         dir: BaseDirectory.Document,
       }
     );
+    console.log(content);
     setText(content);
     setEditedText(content);
   };
