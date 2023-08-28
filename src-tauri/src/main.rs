@@ -2,22 +2,23 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod controllers;
-mod services;
 mod database;
-mod models;
 mod helper;
+mod models;
+mod services;
 
-use controllers::{auth,user,cadet};
+use controllers::{auth, cadet, user};
 
-use tokio::{main};
+use tokio::main;
 
 #[main]
-async fn main()  {
+async fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             auth::create_user,
             auth::login,
             user::get_users,
+            user::update_terms_and_conditions,
             cadet::get_cadets,
             cadet::get_cadet,
             cadet::create_cadets,
@@ -25,5 +26,4 @@ async fn main()  {
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
-
 }

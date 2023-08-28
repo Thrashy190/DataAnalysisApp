@@ -4,7 +4,9 @@ import { useAuth } from "../context/AuthProvider.jsx";
 
 const ProtectedRoute = () => {
   const { currentUser } = useAuth();
-  return currentUser ? <Outlet /> : <Navigate to="/" />;
+
+
+  return currentUser ? currentUser.accept_terms_and_conditions ? <Outlet /> : <Navigate to="/" /> : <Navigate to="/" />;
 };
 
 export default ProtectedRoute;

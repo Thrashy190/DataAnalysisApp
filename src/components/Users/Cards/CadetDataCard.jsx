@@ -40,7 +40,7 @@ const CadetDataCard = ({ cadet }) => {
             <div className="text-base">{cadet.birth}</div>
           </CCol>
           <CCol xs={12} md={4}>
-            <h3 className="text-lg font-semibold">Rango del cadete: </h3>
+            <h3 className="text-lg font-semibold">Fecha de creacion: </h3>
             <div className="text-base">{unix_to_date(cadet.create_at)}</div>
           </CCol>
         </CRow>

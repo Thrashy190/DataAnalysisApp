@@ -16,7 +16,7 @@ const Cadet = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchCadet().then(() => {});
+    fetchCadet().then(() => { });
     setIsLoading(false);
   }, []);
 
@@ -77,6 +77,7 @@ const Cadet = () => {
                             key={index}
                             info={cadet[process.title]}
                             name={process.name}
+                            text={process.text}
                           />
                         )
                       );
