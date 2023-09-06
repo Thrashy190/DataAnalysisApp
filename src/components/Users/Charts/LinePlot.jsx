@@ -47,7 +47,16 @@ function LinePlot({ info, name, text }) {
           </CPopover>  </CCardTitle>
       </CCardHeader>
 
-      <Plot data={datasets} useResizeHandler layout={{ autosize: true }} />
+      <Plot
+        data={datasets}
+        useResizeHandler
+        layout={{
+          autosize: true,
+          xaxis: { title: "Tiempo" },
+          yaxis: { title: "Valor" },
+        }}
+        config={{ scrollZoom: true }}
+      />
     </CCard>
   );
 }
